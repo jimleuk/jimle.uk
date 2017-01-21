@@ -1,0 +1,25 @@
+---
+output_filename: posts/index.html
+---
+extend ../templates/root.pug
+
+block title
+    title all posts | #{site_name}
+
+block body
+    .post
+        .post__header
+            .container
+                .row
+                    .col-xs-12
+                        .post__title
+                            h1
+                                a(href=url('/posts/index.html')) All posts 
+    .postindex
+        .container
+            .row
+                each post, i in posts
+                    if (i % 3 == 0)
+                        .clearfix
+                    .col-xs-12.col-sm-4
+                        include ../templates/post_card.pug

@@ -1,0 +1,20 @@
+extend ../templates/root.pug
+
+block title
+    title Page not found | #{site_name}
+
+block body
+    .post
+        .post__header
+            .container
+                .row
+                    .col-xs-12
+                        .post__title
+                            h1
+                                | 🤖 Page not found
+                            p.text-lg
+                                | Sorry, the page you're looking for is not here.
+                                | <br>
+                                | It probably wasn't that interesting anyway.
+                            p.text-lg
+                                a(href=url('/')) Click here

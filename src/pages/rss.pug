@@ -1,0 +1,16 @@
+---
+output_filename: rss.xml
+---
+doctype xml
+rss(version="2.0")
+    channel
+        title #{site_name}
+        link !{url('/')}
+        description #{site_description}
+        language en
+        each post in posts
+            item
+                title #{post.title}
+                link #{post.permalink}
+                description !{post.description ? post.description : ''}
+                pubDate !{(new Date(post.date)).toISOString()}

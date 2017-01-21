@@ -1,0 +1,25 @@
+extends root.pug
+
+block title
+    title all tags | #{site_name}
+
+block body
+    .post
+        .post__header
+            .container
+                .row
+                    .col-xs-12
+                        .post__title
+                            h1
+                                a(href='#') All tags
+    .tagindex
+        .container
+            .row
+                .col-xs-12.col-md-10
+                    each related_posts, tag in tags
+                        .tagindex__item
+                            a(name=tag)
+                            h2 ##{tag}
+                            each post in related_posts
+                                div
+                                    a(href=post.permalink) #{post.title}
