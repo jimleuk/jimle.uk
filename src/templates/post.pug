@@ -1,0 +1,61 @@
+extends root.pug
+block overrides
+    - var permalink = url(`/posts/${path.replace('.md', '.html')}`)
+    - var og_url = permalink
+
+block meta
+    each post in [previous, next]
+        if post
+            link(rel="prefetch" href=url(`/posts/${post.path.replace('.md', '.html')}`))
+
+block body
+    .post
+        .post__header
+            .container
+                .row
+                    .col-xs-12.col-md-10
+                        .post__title
+                            h1
+                                a(href=permalink) #{title}
+                        if author
+                            .post__author__img
+                                img(src=static(`/img/${md5(author)}.png`))
+                        .post__meta
+                            span.post__author #{author}
+                            span.post__date !{dateFormat(date)}
+                            if tags
+                                .post__tags !{tagsFormat(tags)}
+        .post__body
+            .container
+                .row
+                    .col-xs-12.col-md-7.col-md-offset-1
+                        .post__body__contents !{contents}
+                        if meta
+                            .post__body__meta
+                                ul.list-style-none.margin-none
+                                    each pair in meta.split(',')
+                                        li
+                                            - var values = pair.split('=')
+                                            strong #{values[0]}
+                                            |  #{values[1]}
+        .post__footer
+            .container
+                if (previous || next)
+                    .row
+                        .col-xs-12.col-sm-8.p-b-2
+                            hr
+                .row
+                    if previous
+                        - var post = previous
+                        - (post.permalink = post.path.replace('.md', '.html'))
+                        .col-xs-12.col-sm-4
+                            .post__footer__item
+                                strong Previously
+                                include post_card.pug
+                    if next
+                        - var post = next
+                        - (post.permalink = post.path.replace('.md', '.html'))
+                        .col-xs-12.col-sm-4
+                            .post__footer__item
+                                strong Next up
+                                include post_card.pug

@@ -1,0 +1,29 @@
+<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+<title>twitter</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(38 95)" figma:type="canvas">
+<g id="twitter" style="mix-blend-mode:normal;" figma:type="frame">
+<g id="Rectangle" style="mix-blend-mode:normal;" figma:type="rounded-rectangle">
+<mask id="mask0_outline_out">
+<rect id="mask0_outline_inv" fill="white" x="-2" y="-2" width="24" height="24" transform="translate(-36 -93)"/>
+<use xlink:href="#path0_fill" fill="black" transform="translate(-36 -93)"/>
+</mask>
+<g mask="url(#mask0_outline_out)">
+<use xlink:href="#path1_stroke_2x" transform="translate(-36 -93)" style="mix-blend-mode:normal;"/>
+</g>
+</g>
+<g id="Twitter_bird_logo_2012" style="mix-blend-mode:normal;" figma:type="frame">
+<g id="Group" style="mix-blend-mode:normal;" figma:type="frame">
+<g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
+<use xlink:href="#path2_fill" transform="translate(-33 -89)" style="mix-blend-mode:normal;"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 0 3C 0 1.34315 1.34315 0 3 0L 17 0C 18.6569 0 20 1.34315 20 3L 20 17C 20 18.6569 18.6569 20 17 20L 3 20C 1.34315 20 0 18.6569 0 17L 0 3Z"/>
+<path id="path1_stroke_2x" d="M 3 2L 17 2L 17 -2L 3 -2L 3 2ZM 18 3L 18 17L 22 17L 22 3L 18 3ZM 17 18L 3 18L 3 22L 17 22L 17 18ZM 2 17L 2 3L -2 3L -2 17L 2 17ZM 3 -2C 0.238576 -2 -2 0.238576 -2 3L 2 3C 2 2.44772 2.44772 2 3 2L 3 -2ZM 17 2C 17.5523 2 18 2.44772 18 3L 22 3C 22 0.238576 19.7614 -2 17 -2L 17 2ZM 18 17C 18 17.5523 17.5523 18 17 18L 17 22C 19.7614 22 22 19.7614 22 17L 18 17ZM 3 18C 2.44772 18 2 17.5523 2 17L -2 17C -2 19.7614 0.238576 22 3 22L 3 18Z"/>
+<path id="path2_fill" d="M 4.40283 12C 9.68612 12 12.5753 7.38373 12.5753 3.38067C 12.5753 3.24955 12.5728 3.11903 12.5672 2.98909C 13.1281 2.56149 13.6155 2.02787 14 1.42041C 13.4853 1.66168 12.9315 1.8241 12.3505 1.89733C 12.9435 1.52229 13.3988 0.929021 13.6136 0.221776C 13.0586 0.568764 12.444 0.820957 11.7897 0.957114C 11.2655 0.368289 10.5193 -6.29024e-07 9.69304 -6.29024e-07C 8.10683 -6.29024e-07 6.82054 1.35667 6.82054 3.02895C 6.82054 3.26668 6.84574 3.4979 6.89502 3.7197C 4.50777 3.59301 2.39094 2.38756 0.974233 0.554587C 0.727554 1.00227 0.585315 1.52231 0.585315 2.07719C 0.585315 3.1282 1.09241 4.05603 1.86353 4.59883C 1.39228 4.58347 0.949592 4.44704 0.562671 4.21994C 0.562248 4.23265 0.562247 4.24505 0.562247 4.25863C 0.562247 5.72574 1.55234 6.95066 2.86663 7.22823C 2.62527 7.29762 2.37132 7.33483 2.10923 7.33483C 1.92443 7.33483 1.74438 7.31565 1.56939 7.2802C 1.93506 8.48387 2.99544 9.35977 4.2526 9.38425C 3.26952 10.1969 2.0311 10.681 0.685146 10.681C 0.453585 10.681 0.224827 10.6671 -1.20201e-06 10.639C 1.27121 11.4984 2.78065 11.9998 4.40299 11.9998"/>
+</defs>
+</svg>

@@ -1,0 +1,37 @@
+doctype html
+block overrides
+html(lang='en')
+    head
+        block title
+            title #{title} | #{site_name}
+        
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+        meta(name='viewport' content='width=device-width')
+
+        link(rel='alternate' hreflang='x-default' href=(og_url || url('/')))
+        meta(content=site_name name='og:site_name')
+        meta(content=(og_title || title || site_title) name='og:title')
+        meta(content=(og_url || url('/')) name='og:url')
+        meta(content=(og_description || description || site_description) name='og:description')
+        meta(content='website' name='og:type')
+        meta(content=static('/img/site_icon.png') name='og:image')
+
+        link(rel='stylesheet' href=static('/css/main.css'))
+        link(href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet")
+
+        link(rel='alternate' type='application/rss+xml' title='RSS Feed' href=url('/rss.xml'))
+
+        block meta
+    body
+        .overlay
+        .page
+            block header
+                include header.pug
+            block body
+            block footer
+                include footer.pug
+            block scripts
+
+//
+    !{(new Date()).getFullYear()} copyright Jim Le <jim@height.io>. All rights reserved.
