@@ -22,4 +22,4 @@ block body
                             h2 ##{tag}
                             each post in tagged_posts
                                 div
-                                    a(href=post.permalink) #{post.title}
+                                    a(href=url(post.permalink)) #{post.title}
