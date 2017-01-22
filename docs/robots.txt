@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /error.html
+Disallow: /static/
+
+Sitemap: http://jimle.uk/sitemap.xml
