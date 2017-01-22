@@ -9,7 +9,7 @@
     "dev": "rm -rf build/* && node index",
     "serve": "http-server ./build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ghpages": "cp -R build/* docs/"
+    "ghpages": "NODE_ENV=ghpages node index"
   },
   "repository" : "https://github.com/jimle-uk/jimle.uk.git",
   "bugs": "https://github.com/jimle-uk/jimle.uk/issues",

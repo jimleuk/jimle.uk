@@ -12,13 +12,14 @@ const cache_posts           = require('./plugins/cache-posts');
 
 const settings      = require('./settings');
 const template_tags = require('./src/utils/template_tags');
+const build_dir     = settings.build_dir;
 
 // =============================================================================
 // assets
 // =============================================================================
 Metalsmith(__dirname)
     .source('src/static/css')
-    .destination('build/static/css')
+    .destination(`${build_dir}/static/css`)
     .clean(true)
     .use(ignore(['vendor/*']))
     .use(sass({ outputStyle: 'compressed' }))
@@ -28,7 +29,7 @@ Metalsmith(__dirname)
 
 Metalsmith(__dirname)
     .source('src/static/img')
-    .destination('build/static/img')
+    .destination(`${build_dir}/static/img`)
     .clean(true)
     .build(function(err) {
         if (err) throw err;
@@ -40,7 +41,7 @@ Metalsmith(__dirname)
 Metalsmith(__dirname)
     .metadata(Object.assign({}, settings, template_tags))
     .source('src/posts')
-    .destination('build/posts')
+    .destination(`${build_dir}/posts`)
     .clean(true)
     .use(collections({
         posts: '*.md',
@@ -63,7 +64,7 @@ Metalsmith(__dirname)
 Metalsmith(__dirname)
     .metadata(Object.assign({}, settings, template_tags))
     .source('src/pages')
-    .destination('build')
+    .destination(build_dir)
     .use(metalsmith_pug({
         getPosts: () => cache_posts.data.posts,
         getTags: () => cache_posts.data.tags
