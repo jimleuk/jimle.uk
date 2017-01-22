@@ -47,14 +47,14 @@ block body
                 .row
                     if previous
                         - var post = previous
-                        - (post.permalink = post.path.replace('.md', '.html'))
+                        - (post.permalink = `/posts/${post.path.replace('.md', '.html')}`)
                         .col-xs-12.col-sm-4
                             .post__footer__item
                                 strong Previously
                                 include post_card.pug
                     if next
                         - var post = next
-                        - (post.permalink = post.path.replace('.md', '.html'))
+                        - (post.permalink = `/posts/${post.path.replace('.md', '.html')}`)
                         .col-xs-12.col-sm-4
                             .post__footer__item
                                 strong Next up
