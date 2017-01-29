@@ -10,28 +10,28 @@ block body
     .page__body
         .container
             .row
-                .col-xs-10.col-xs-offset-1
+                .col-xs-12.col-sm-10.col-sm-offset-1.col-md-12.col-md-offset-0
                     .row
-                        .col-xs-12.col-sm-7
+                        .col-xs-12.col-md-4
                             include ../templates/intro.pug
-                        .col-xs-12.col-sm-4.col-sm-offset-1
-                            h2.shutter(style="height:26px")
-                                .shutter__inner
-                                    a(href=url('/posts/index.html')) Latest Posts
-                                    a(href=url('/posts/index.html')) View all Posts
-                            each post in posts.slice(0, 1)
-                                include ../templates/post_card.pug
-                    .row.p-t-2
-                        .col-xs-12
+                            .p-t-2
+                                h2.shutter(style="height:26px")
+                                    .shutter__inner
+                                        a(href=url('/posts/index.html')) Latest Posts
+                                        a(href=url('/posts/index.html')) View all Posts
+                                each post in posts.slice(0, 1)
+                                    include ../templates/post_card.pug
+                        .col-xs-12.col-md-8
                             h2 Featured Works
-                            img(src=static('/img/portfolio_1a.png') srcset=`${static('/img/portfolio_1a@2x.png')} 2x`)
+                            a(href=static('/img/portfolio_1a@2x.png') alt="Featured work 1").index_image
+                                img(src=static('/img/portfolio_1a.png') srcset=`${static('/img/portfolio_1a@2x.png')} 2x`)
                             .p-t-2
                                 .row
                                     .col-xs-12.col-sm-6
-                                        img(src=static('/img/portfolio_1c.png') srcset=`${static('/img/portfolio_1c@2x.png')} 2x`)
+                                        a(href=static('/img/portfolio_1c@2x.png') alt="Featured work 2").index_image
+                                            img(src=static('/img/portfolio_1c.png') srcset=`${static('/img/portfolio_1c@2x.png')} 2x`)
                                     .col-xs-12.col-sm-6
-                                        img(src=static('/img/portfolio_1b.png') srcset=`${static('/img/portfolio_1b@2x.png')} 2x`)
-                    .row
-                        .col-xs-12
-                            hr
-                            h3 Coming soon &hellip;
+                                        a(href=static('/img/portfolio_1b@2x.png') alt="Featured work 3").index_image
+                                            img(src=static('/img/portfolio_1b.png') srcset=`${static('/img/portfolio_1b@2x.png')} 2x`)
+                                hr
+                                h3 Coming soon &hellip;
