@@ -9,7 +9,7 @@
     "dev": "rm -rf build/* && node index",
     "serve": "http-server ./build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ghpages": "NODE_ENV=ghpages node index",
+    "ghpages": "rm -rf docs/* && NODE_ENV=ghpages node index",
     "deploy": "source .env && aws s3 rm s3://$AWS_S3_BUCKET --recursive && aws s3 cp build s3://$AWS_S3_BUCKET --recursive",
     "ssl-create": "source .env && bash ./scripts/ssl-create.sh"
   },

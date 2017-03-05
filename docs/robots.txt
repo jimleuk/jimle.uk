@@ -1,3 +1,6 @@
+User-agent: Baiduspider
+disallow: /
+
 User-agent: *
 Disallow: /error.html
 Disallow: /static/
