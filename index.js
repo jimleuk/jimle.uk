@@ -14,6 +14,7 @@ const cache_posts           = require('./plugins/cache-posts');
 
 const settings      = require('./settings');
 const template_tags = require('./src/utils/template_tags');
+const TaskSequence = require('./src/utils/task_sequence');
 const build_dir     = settings.build_dir;
 
 // =============================================================================
@@ -49,37 +50,53 @@ Metalsmith(__dirname)
 // =============================================================================
 // posts
 // =============================================================================
-Metalsmith(__dirname)
-    .metadata(Object.assign({}, settings, template_tags))
-    .source('src/posts')
-    .destination(`${build_dir}/posts`)
-    .clean(true)
-    .use(collections({
-        posts: '*.md',
-        sortBy: 'date',
-        reverse: true
-    }))
-    .use(metalsmith_markdownit())
-    .use(layouts({
-        engine: 'pug',
-        directory: 'src/templates'
-    }))
-    .use(cache_posts.plugin)
-    .build(function(err) {
-        if (err) throw err;
-    });
+const phase_posts = (resolve) => {
+    Metalsmith(__dirname)
+        .metadata(Object.assign({}, settings, template_tags))
+        .source('src/posts')
+        .destination(`${build_dir}/posts`)
+        .clean(true)
+        .use(collections({
+            posts: '*.md',
+            sortBy: 'date',
+            reverse: true
+        }))
+        .use(metalsmith_markdownit())
+        .use(layouts({
+            engine: 'pug',
+            directory: 'src/templates'
+        }))
+        .use(cache_posts.plugin)
+        .build((err) => {
+            if (err) throw err;
+            resolve();
+        });
+};
 
 // =============================================================================
 // pages
 // =============================================================================
-Metalsmith(__dirname)
-    .metadata(Object.assign({}, settings, template_tags))
-    .source('src/pages')
-    .destination(build_dir)
-    .use(metalsmith_pug({
-        getPosts: () => cache_posts.data.posts,
-        getTags: () => cache_posts.data.tags
-    }))
-    .build(function(err) {
-        if (err) throw err;
-    });
+const phase_pages = (resolve) => {
+    Metalsmith(__dirname)
+        .metadata(Object.assign({}, settings, template_tags))
+        .source('src/pages')
+        .destination(build_dir)
+        .use(metalsmith_pug({
+            getPosts: () => cache_posts.data.posts,
+            getTags: () => cache_posts.data.tags
+        }))
+        .build((err) => {
+            if (err) throw err;
+            resolve();
+        })
+};
+
+// =============================================================================
+// Ensure "posts" are built first, before building out "pages"
+// =============================================================================
+const taskSequence = new TaskSequence();
+
+taskSequence
+    .run(phase_posts)
+    .run(phase_pages)
+    .end();
