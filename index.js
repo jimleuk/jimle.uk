@@ -1,3 +1,5 @@
+#!/usr/local/bin/node
+
 const path          = require('path');
 const Metalsmith    = require('metalsmith');
 const collections   = require('metalsmith-collections');
@@ -30,6 +32,15 @@ Metalsmith(__dirname)
 Metalsmith(__dirname)
     .source('src/static/img')
     .destination(`${build_dir}/static/img`)
+    .clean(true)
+    .build(function(err) {
+        if (err) throw err;
+    });
+
+// misc assets like favicon, robots.txt
+Metalsmith(__dirname)
+    .source('src/assets')
+    .destination(`${build_dir}`)
     .clean(true)
     .build(function(err) {
         if (err) throw err;
