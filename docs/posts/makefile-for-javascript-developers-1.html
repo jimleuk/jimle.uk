@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="en"><head><title>Using make - an opinionated guide for javascript developers pt.1 | jimle.uk</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width"><link rel="alternate" hreflang="x-default" href="https://jimle-uk.github.io/jimle.uk/posts/makefile-for-javascript-developers-1.html"><meta content="jimle.uk" name="og:site_name"><meta content="Using make - an opinionated guide for javascript developers pt.1" name="og:title"><meta content="https://jimle-uk.github.io/jimle.uk/posts/makefile-for-javascript-developers-1.html" name="og:url"><meta content="This is a mirror site for http://jimle.uk" name="og:description"><meta content="website" name="og:type"><meta content="https://jimle-uk.github.io/jimle.uk/static/img/site_icon.png?t=1492285055228" name="og:image"><link rel="stylesheet" href="https://jimle-uk.github.io/jimle.uk/static/css/main.css?t=1492285055228"><link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://jimle-uk.github.io/jimle.uk/rss.xml"><link rel="shortcut icon" href="favicon.ico" type="image/x-icon"><link rel="icon" href="favicon.ico" type="image/x-icon"><link rel="prefetch" href="https://jimle-uk.github.io/jimle.uk/posts/winter-wonderland.html"><link rel="prefetch" href="https://jimle-uk.github.io/jimle.uk/posts/makefile-for-javascript-developers-2.html"></head><body><div class="overlay"></div><div class="page"><div class="header"><div class="container"><div class="row"><div class="col-xs-8"><div class="header__column"><div class="header__cell"><div class="header__title shutter"><div class="shutter__inner"><a href="https://jimle-uk.github.io/jimle.uk/">jimle.uk</a><a href="https://jimle-uk.github.io/jimle.uk/">Back to Homepage</a></div></div></div></div></div></div></div></div><div class="post"><div class="post__header"><div class="container"><div class="row"><div class="col-xs-12 col-md-10"><div class="post__title"><h1><a href="https://jimle-uk.github.io/jimle.uk/posts/makefile-for-javascript-developers-1.html">Using make - an opinionated guide for javascript developers pt.1</a></h1></div><div class="post__author__img"><img src="https://jimle-uk.github.io/jimle.uk/static/img/4e73863642bc3c5f1e5fef3a22deafd0.png?t=1492285055228"></div><div class="post__meta"><span class="post__author">Jim Le</span><span class="post__date">Sunday, 9th Apr 2017</span><div class="post__tags"><a href="https://jimle-uk.github.io/jimle.uk/tags.html#javascript">#javascript</a></div></div></div></div></div></div><div class="post__body"><div class="container"><div class="row"><div class="col-xs-12 col-md-7 col-md-offset-1"><div class="post__body__contents"><h3>This post is part 1 of a two part series</h3>
+<ul>
+<li>
+<p><a href="https://jimle.uk/posts/makefile-for-javascript-developers-1.html"><strong>Part I. Using make</strong></a><br>
+where I go over the basics of a makefile and the relevant parts you'll need to know.</p>
+</li>
+<li>
+<p><a href="https://jimle.uk/posts/makefile-for-javascript-developers-2.html"><strong>Part II. Using make for a javascript project</strong></a><br>
+where I show you how to get started using make in your daily javascript workflow.</p>
+</li>
+</ul>
+<hr>
+<h3>Summary</h3>
+<p><code>make</code> is useful for stringing together multiple tasks to automate a build process. In a sufficiently sized project, we can assume there are various tasks such as moving files around, running tests, deploying to a remote location are all involved as well as the actual &quot;building&quot;. This is where <code>make</code> can make this process manageable.</p>
+<p>When running <code>make</code> in a directory, it will look for a <code>makefile</code> by default. This is a plain ascii file which
+list a bunch of user-defined tasks. Each task may have a list of dependencies; other tasks which will run beforehand<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> and optionally, one or more shell commands which are executed in succession when the task is called. It is possible to have tasks which simple combine other tasks and have commands of their own.</p>
+<h3>1. Getting started</h3>
+<p>To start using <code>make</code>, create a file called <code>makefile</code> in the top-level directory of your project.<br>
+Next, add the following code to your <code>makefile</code>:</p>
+<pre><code class="language-make">hello:
+    echo &quot;Hello from make!&quot;
+</code></pre>
+<p>from the command line, run the command <code>make</code>:</p>
+<pre><code class="language-terminal">$ make
+Hello from make!
+</code></pre>
+<h3>2. Dependencies</h3>
+<p>In the following example, there are three named tasks <code>clean</code>, <code>build</code> and <code>deploy</code>. <code>clean</code> has no dependencies but
+<code>build</code> has one (which is <code>clean</code>) and <code>deploy</code> has one (which is <code>build</code>). Their respective commands are listed beneath each task and indented once.</p>
+<pre><code class="language-make">clean:
+    rm -rf ./build
+
+build: clean
+    webpack -p
+
+deploy: build
+    aws s3 cp ./build s3://mybucket --recursive
+</code></pre>
+<p>In the <code>deploy</code> task, we don't have to specify <code>clean</code> as a dependency as it is a dependency of <code>build</code>. Running <code>deploy</code>
+will run <code>clean</code>, then <code>build</code> before running our <code>deploy</code> task.</p>
+<p>To have more than one dependency, simple add them to the dependency line. In the following example, <code>deploy</code> has two dependencies, <code>test</code> and <code>build</code>. Dependencies are executed left to right; that is to say, <code>test</code> will run first then <code>build</code>.</p>
+<pre><code class="language-make">deploy: test build 
+    aws s3 cp ./build s3://mybucket --recursive
+</code></pre>
+<h3>3. Executing a task</h3>
+<p>When you run <code>make</code> with no arguments, it'll run the first task in the <code>makefile</code>. To run a specific task,
+just use the name of the task as the first argument.</p>
+<pre><code class="language-terminal"># Run the first task in the makefile
+$ make
+
+# Run the deploy task
+$ make deploy
+</code></pre>
+<h3>4. Multiple commands per task ...</h3>
+<p>It's possible to have multiple commands under a single task. The commands will execute one after the other. Just remember to keep the indentation the same as the first command.</p>
+<pre><code class="language-make">deploy: build
+    aws s3 rm s3://mybucket --recursive
+    aws s3 cp ./build s3://mybucket --recursive
+</code></pre>
+<h3>5. ... but watch out for context</h3>
+<p>In <code>make</code>, each line is treated as a seperate shell session. This usually means you won't be able to
+pass outputs or return values from one command to the next<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>. However you can use a <code>\</code> at the end of each line to workaround this.</p>
+<pre><code class="language-make"># This example will fail.
+
+deploy: build
+    AWSBUCKET=mybucket
+    aws s3 rm s3://$(AWSBUCKET) --recursive          # AWSBUCKET is undefined,
+    aws s3 cp ./build s3://$(AWSBUCKET) --recursive  # here too
+
+# This example is ok ...
+
+deploy: build
+    AWSBUCKET=mybucket; \
+    aws s3 rm s3://$(AWSBUCKET) --recursive; \
+    aws s3 cp ./build s3://$(AWSBUCKET) --recursive
+
+# ... because it's the equivalent of writing
+
+deploy: build
+    AWSBUCKET=mybucket; aws s3 rm s3://$(AWSBUCKET) --recursive; aws s3 cp ./build s3://$(AWSBUCKET) --recursive
+</code></pre>
+<h3>6. Working with environment variables</h3>
+<p>You can set environment variables in your <code>makefile</code>. Note that these will override existing environment variables<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>.</p>
+<pre><code class="language-make">NODE_ENV = production
+
+test:
+    echo &quot;We'll test in $(NODE_ENV)!&quot;
+</code></pre>
+<pre><code class="language-terminal">$ make
+We'll test in production!
+
+$ NODE_ENV=staging make
+We'll test in production!
+</code></pre>
+<p>We can flip this behaviour by using the <code>-e</code> flag.</p>
+<pre><code>$ NODE_ENV=staging make -e
+We'll test in staging!
+</code></pre>
+<p>Technically, we <em>can</em> override our overrides like so, but there are subtleties with how
+you call variables:</p>
+<pre><code class="language-make">NODE_ENV = production
+
+test:
+    NODE_ENV=staging; \
+    echo &quot;We'll test in $$NODE_ENV!&quot;; \   # This will be overridden ...
+    echo &quot;We'll release in $(NODE_ENV)!&quot;  # ... but this will remain as &quot;production&quot; when evalutated
+</code></pre>
+<pre><code class="language-terminal">$ make
+We'll test in staging!
+We'll release in production!
+</code></pre>
+<p>Watch out for recursive errors like this one.</p>
+<pre><code class="language-make">PATH = node_modules/.bin:$(PATH)
+
+...
+
+$ make
+makefile:1: *** Recursive variable `PATH' references itself (eventually).  Stop.
+</code></pre>
+<p>You can fix this by using <code>:=</code> assignment instead.</p>
+<pre><code class="language-make">PATH := node_modules/.bin:$(PATH)
+</code></pre>
+<h3>7. Functions</h3>
+<p><code>make</code> also has support for functions. You can <strong>define</strong> them like so:</p>
+<p><strong><code>define &lt;fn name&gt;</code></strong><br>
+<code>...</code><br>
+<strong><code>endef</code></strong></p>
+<pre><code class="language-make"># you can pass arguments $1, $2 etc. like a regular bash function
+define say_something
+    echo &quot;$1&quot;
+endef
+</code></pre>
+<p>To call a function use</p>
+<h4><code>$(call &lt;fn name&gt;,[arguments,...])</code></h4>
+<pre><code>deploy: build
+    $(call say_something,&quot;Deploying!&quot;)
+    AWSBUCKET=mybucket; \
+    aws s3 rm s3://$(AWSBUCKET) --recursive; \
+    aws s3 cp ./build s3://$(AWSBUCKET) --recursive
+</code></pre>
+<p>Alternatively, you may find <code>$(shell ...)</code> useful if you only need to call it once.</p>
+<p><strong><code>$(shell ...)</code></strong></p>
+<pre><code class="language-make">deploy: build
+    echo &quot;Deploying with $(shell aws s3 --version)&quot;
+    ...
+</code></pre>
+<h3>8. Conditionals</h3>
+<p>As you've noticed by now, <code>make</code> does have a few builtin commands ie. <code>$(shell ...)</code>.<br>
+I don't have a comprehensive list but here are two I've found useful for conditionals.</p>
+<h4><code>$(if [value],[success],[fail])</code></h4>
+<ul>
+<li>Where <code>value</code>, <code>success</code>, <code>fail</code> can be a string or a function</li>
+<li>To trigger a <code>success</code>, <code>value</code> must satisfy <code>[[ -n value ]]</code></li>
+<li>To trigger a <code>fail</code>, <code>value</code> must satisfy <code>[[ -z value ]]</code></li>
+</ul>
+<pre><code class="language-make"># will always return &quot;15%&quot;, since &quot;active&quot; is not null
+SPECIAL_OFFER = $(if &quot;active&quot;,&quot;15%&quot;,&quot;0%&quot;) 
+
+# will return &quot;0%&quot;
+SPECIAL_OFFER = $(if ,&quot;15%&quot;,&quot;0%&quot;)
+
+# real world scenario, you'll probably call a function
+SPECIAL_OFFER = $(if $(shell ...), &quot;15%&quot;, &quot;0%&quot;)
+</code></pre>
+<h4><code>$(filter [value1], [value2])</code></h4>
+<ul>
+<li>Where <code>value1</code> and <code>value2</code> can be a string or function</li>
+<li>Returns <code>value1</code> if <code>value1 == value2</code> else null</li>
+<li>Use it in conjunction with <code>$(if ...)</code></li>
+</ul>
+<pre><code class="language-make">$(filter abc, abc)      # abc
+$(filter abc, def)      # null
+</code></pre>
+<h3>Conclusion</h3>
+<p>Congrats on making it this far.<br>
+Although what I've said here only <em>really</em> scratches the surface, it should be
+enough for anyone to start writing productive makefiles.</p>
+<p>In the next article, I do just that and show you some tips and tricks which help
+you get started on writing a makefile for your javascript projects.</p>
+<h3>This post is part 1 of a two part series</h3>
+<ul>
+<li><a href="https://jimle.uk/posts/makefile-for-javascript-developers-1.html"><strong>Part I. Using make</strong></a><br>
+where I go over the basics of a makefile and the relevant parts you'll need to know.</li>
+<li><a href="https://jimle.uk/posts/makefile-for-javascript-developers-2.html"><strong>Part II. Using make for a javascript project</strong></a><br>
+where I show you how to get started using make in your daily javascript workflow.</li>
+</ul>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>I should write a bit of a disclaimer here that <code>make</code> was designed to watch for file changes in code and &quot;dependencies&quot; are the means to specify which files to watch. This is pretty advanced stuff and quite useful for the javascript developer but a little beyond the scope of this post. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Ouputs and/or return values to stdout. If you're writing to a file then reading from it later, you should be good. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>Probably good to know that the variables are only overridden for the scope and duration of the script and the changes do not propagate to the shell session. <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div></div></div></div></div><div class="post__footer p-b-3"><div class="container"><div class="row"><div class="col-xs-12 col-sm-8 p-b-2"><hr></div></div><div class="row"><div class="col-xs-12 col-sm-6 col-md-4"><div class="intro"><h3>About</h3><p>Welcome to my personal blog where I talk mostly about the tools
+and techniques of interest in my work. I develop primarily using a
+javascript stack and develop for digital consumer products.</p><hr><h3>Author</h3><p>Currently <strong>Senior Web Developer</strong> at 
+<a href="http://withreason.co.uk"><strong>@REASON</strong></a>,
+working with some amazing brands like Deutsche Telekom and GAP. 
+Previously <strong>Lead Frontend Developer</strong> at 
+<a href="http://about.beauhurst.com"><strong>@BEAUHURST</strong></a>, a data
+platform for clients like KPMG, Barclays and InnovateUK.</p><div class="m-t-2"><img class="m-r-1" src="https://jimle-uk.github.io/jimle.uk/static/img/site_icon.png?t=1492285055228" align="left" width="72"><p><strong>Available for hire 🔥 </strong>
+<br> Please send inquiries to <a href="mailto:jim@height.io"><strong>jim@height.io</strong></a>.</p><ul class="social"><li><a href="https://uk.linkedin.com/in/jimleuk"><img src="https://jimle-uk.github.io/jimle.uk/static/img/linkedin.svg?t=1492285055228" width="24"></a></li><li><a href="http://twitter.com/jimle_uk"><img src="https://jimle-uk.github.io/jimle.uk/static/img/twitter.svg?t=1492285055228" width="24"></a></li></ul></div></div></div><div class="col-xs-12 col-sm-6 col-md-4"><div class="post__footer__item"><h3>Next up</h3><div class="post__card"><h2><a href="https://jimle-uk.github.io/jimle.uk/posts/makefile-for-javascript-developers-2.html">Using make - an opinionated guide for javascript developers pt.2</a></h2><strong>Saturday, 15th Apr 2017</strong><div class="post__tags"><a href="https://jimle-uk.github.io/jimle.uk/tags.html#javascript">#javascript</a></div></div></div><div class="post__footer__item"><h3>Previously</h3><div class="post__card"><h2><a href="https://jimle-uk.github.io/jimle.uk/posts/winter-wonderland.html">Winter wonderland</a></h2><strong>Saturday, 24th Dec 2016</strong><div class="post__tags"><a href="https://jimle-uk.github.io/jimle.uk/tags.html#photo">#photo</a><a href="https://jimle-uk.github.io/jimle.uk/tags.html#family">#family</a></div></div></div></div></div></div></div></div></div></body></html><!--2017 copyright Jim Le <jim@height.io>. All rights reserved.-->
