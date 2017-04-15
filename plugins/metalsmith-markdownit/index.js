@@ -45,6 +45,7 @@ module.exports = (opts) => {
 
             try {
                 const contents = md.render(data.contents);
+                data.html_content = contents;
                 data.contents = new Buffer(contents);
                 files[file] = data;
                 done();

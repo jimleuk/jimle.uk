@@ -2,8 +2,9 @@ const pth = require('path');
 const crypto = require('crypto');
 const settings = require('../../settings');
 const Moment = require('moment');
-const protocol = settings.https ? 'https://' : 'http://';
+const groupBy = require('lodash/groupBy');
 
+const protocol = settings.https ? 'https://' : 'http://';
 const cache_string = +(new Date());
 
 const url = (path) => {
@@ -37,5 +38,9 @@ module.exports = {
 
     md5: (str) => {
         return crypto.createHash('md5').update(str).digest('hex');
+    },
+
+    groupPostsByDate: (posts, fmtString='YYYY-MM-DD') => {
+        return groupBy(posts, p => Moment(new Date(p.date)).format(fmtString));
     }
 };

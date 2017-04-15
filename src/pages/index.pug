@@ -7,31 +7,39 @@ block header
 block footer
 
 block body
-    .page__body
-        .container
+    .nav
+        .nav__row
+            .container-fluid
+                .row
+                    .col-xs-12
+                        a.nav__item.nav__brand(href='/') JIMLE.UK
+                        span.nav__item.nav__social
+                            a(href="https://twitter.com/jimle_uk") @jimle_uk
+                        span.nav__item.nav__tagline About products and Javascript
+        .nav__row.nav__row_dark
+            .container-fluid
+                .row
+                    .col-xs-12
+                        .nav__item 🔥 Available for hire! <a href="mailto:jim@height.io">Get in touch</a>
+    .content
+        .container-fluid
             .row
-                .col-xs-12.col-sm-10.col-sm-offset-1.col-md-12.col-md-offset-0
+                .col-xs-12.col-md-7.col-lg-6
+                    .post__feed_list
+                        each post, i in posts.slice(0, 5)
+                            include ../templates/post_feed.pug
+                .col-xs-12.col-md-4.col-md-offset-1.col-lg-6.col-lg-offset-0
                     .row
-                        .col-xs-12.col-md-4
-                            include ../templates/intro.pug
-                            .p-t-2
-                                h2.shutter(style="height:26px")
-                                    .shutter__inner
-                                        a(href=url('/posts/index.html')) Latest Posts
-                                        a(href=url('/posts/index.html')) View all Posts
-                                each post in posts.slice(0, 1)
-                                    include ../templates/post_card.pug
-                        .col-xs-12.col-md-8
-                            h2 Featured Works
-                            a(href=static('/img/portfolio_1a@2x.png') alt="Featured work 1").index_image
-                                img(src=static('/img/portfolio_1a.png') srcset=`${static('/img/portfolio_1a@2x.png')} 2x`)
-                            .p-t-2
-                                .row
-                                    .col-xs-12.col-sm-6
-                                        a(href=static('/img/portfolio_1c@2x.png') alt="Featured work 2").index_image
-                                            img(src=static('/img/portfolio_1c.png') srcset=`${static('/img/portfolio_1c@2x.png')} 2x`)
-                                    .col-xs-12.col-sm-6
-                                        a(href=static('/img/portfolio_1b@2x.png') alt="Featured work 3").index_image
-                                            img(src=static('/img/portfolio_1b.png') srcset=`${static('/img/portfolio_1b@2x.png')} 2x`)
-                                hr
-                                h3 Coming soon &hellip;
+                        .col-xs-12.col-lg-6
+                            .row
+                                .col-xs-12.col-sm-6.col-md-12
+                                    include ../templates/intro.pug
+                                    hr
+                                .col-xs-12.col-sm-6.col-md-12
+                                    h3 Archive
+                                    each group, key in groupPostsByDate(posts, 'MMMM YYYY')
+                                        strong #{key}
+                                        ul
+                                            each post in group
+                                                li
+                                                    a(href=post.permalink) #{post.title}

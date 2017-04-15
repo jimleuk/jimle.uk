@@ -7,6 +7,7 @@ const layouts       = require('metalsmith-layouts');
 const permalinks    = require('metalsmith-permalinks');
 const ignore        = require('metalsmith-ignore');
 const sass          = require('metalsmith-sass');
+const debug         = require('metalsmith-debug');
 
 const metalsmith_pug        = require('./plugins/metalsmith-pug');
 const metalsmith_markdownit = require('./plugins/metalsmith-markdownit');
@@ -23,9 +24,9 @@ const build_dir     = settings.build_dir;
 Metalsmith(__dirname)
     .source('src/static/css')
     .destination(`${build_dir}/static/css`)
-    .clean(true)
     .use(ignore(['vendor/*']))
     .use(sass({ outputStyle: 'compressed' }))
+    .clean(false)
     .build(function(err) {
         if (err) throw err;
     });
@@ -33,7 +34,7 @@ Metalsmith(__dirname)
 Metalsmith(__dirname)
     .source('src/static/img')
     .destination(`${build_dir}/static/img`)
-    .clean(true)
+    .clean(false)
     .build(function(err) {
         if (err) throw err;
     });
@@ -42,7 +43,7 @@ Metalsmith(__dirname)
 Metalsmith(__dirname)
     .source('src/assets')
     .destination(`${build_dir}`)
-    .clean(true)
+    .clean(false)
     .build(function(err) {
         if (err) throw err;
     });
@@ -55,7 +56,6 @@ const phase_posts = (resolve) => {
         .metadata(Object.assign({}, settings, template_tags))
         .source('src/posts')
         .destination(`${build_dir}/posts`)
-        .clean(true)
         .use(collections({
             posts: '*.md',
             sortBy: 'date',
@@ -67,6 +67,7 @@ const phase_posts = (resolve) => {
             directory: 'src/templates'
         }))
         .use(cache_posts.plugin)
+        .clean(false)
         .build((err) => {
             if (err) throw err;
             resolve();
@@ -85,6 +86,7 @@ const phase_pages = (resolve) => {
             getPosts: () => cache_posts.data.posts,
             getTags: () => cache_posts.data.tags
         }))
+        .clean(false)
         .build((err) => {
             if (err) throw err;
             resolve();
@@ -92,7 +94,8 @@ const phase_pages = (resolve) => {
 };
 
 // =============================================================================
-// Ensure "posts" are built first, before building out "pages"
+// Chain the phases to run in sequence
+// assets don't have dependencies so they can run asynchronous
 // =============================================================================
 const taskSequence = new TaskSequence();
 

@@ -38,24 +38,27 @@ block body
                                             - var values = pair.split('=')
                                             strong #{values[0]}
                                             |  #{values[1]}
-        .post__footer
+        .post__footer.p-b-3
             .container
                 if (previous || next)
                     .row
                         .col-xs-12.col-sm-8.p-b-2
                             hr
                 .row
-                    if previous
-                        - var post = previous
-                        - (post.permalink = `/posts/${post.path.replace('.md', '.html')}`)
-                        .col-xs-12.col-sm-4
-                            .post__footer__item
-                                strong Previously
-                                include post_card.pug
-                    if next
-                        - var post = next
-                        - (post.permalink = `/posts/${post.path.replace('.md', '.html')}`)
-                        .col-xs-12.col-sm-4
-                            .post__footer__item
-                                strong Next up
-                                include post_card.pug
+                    .col-xs-12.col-sm-6.col-md-4
+                        include intro.pug
+                    .col-xs-12.col-sm-6.col-md-4
+                        if next
+                            - var post = next
+                            - (post.permalink = `/posts/${post.path.replace('.md', '.html')}`)
+                                .post__footer__item
+                                    h3 Next up
+                                    include post_card.pug
+                        if previous
+                            - var post = previous
+                            - (post.permalink = `/posts/${post.path.replace('.md', '.html')}`)
+                                .post__footer__item
+                                    h3 Previously
+                                    include post_card.pug
+
+block footer

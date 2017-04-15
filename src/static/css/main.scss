@@ -3,7 +3,7 @@
 @import 'vendor/hljs';
 
 body {
-	color: $gray_darkest;
+	color: #332f29;
 	font-size: $fontsize_base;
 	background-color: #03A9F4;
 }
@@ -92,8 +92,10 @@ $spacer: 15;
 // layout
 // =============================================================================
 
+@import 'grid';
 @import 'header';
 @import 'footer';
+@import 'nav';
 @import 'page';
 @import 'post';
 @import 'tags';

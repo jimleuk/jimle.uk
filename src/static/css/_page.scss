@@ -15,15 +15,7 @@
     top: 0;
     width: 100%;
     min-height: 100%;
-    background-color: #fff;
-}
-
-.page__body {
-    padding-top: 90px;
-    padding-bottom: 120px;
-    h1 {
-        font-size: 24px;
-    }
+    background-color: #fafafa;
 }
 
 .intro {
@@ -31,4 +23,9 @@
         color: $red;
         text-decoration: underline;
     }
+}
+
+.content {
+    padding-top: 32px;
+    padding-bottom: 32px;
 }

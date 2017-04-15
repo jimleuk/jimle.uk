@@ -1,0 +1,31 @@
+.nav {
+}
+
+.nav__row {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #fff;
+
+    &:not(:last-of-type) {
+        border-bottom: 1px solid #eee;
+    }
+}
+
+.nav__row_dark {
+    background-color: #fafafa;
+    color: #9bafbd;
+}
+
+.nav__item {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.nav__brand {
+    color: inherit;
+    font-weight: 700;
+}
+
+.nav__tagline {
+    color: $gray_dark;
+}

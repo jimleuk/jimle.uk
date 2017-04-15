@@ -13,7 +13,7 @@ module.exports = {
             ...Object.keys(files).map((file) => (
                 Object.assign(
                     { permalink: `/posts/${file.toLowerCase()}` },
-                    pick(files[file], ['title', 'author', 'date', 'tags', 'meta', 'stats'])
+                    pick(files[file], ['title', 'author', 'date', 'tags', 'meta', 'stats', 'html_content'])
                 )
             )).sort((b, a) => (new Date(b.date)) < (new Date(a.date)))
         );

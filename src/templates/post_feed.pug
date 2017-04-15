@@ -1,0 +1,9 @@
+.post__feed
+    .post__feed_head
+        h2
+            a(href=url(post.permalink)) #{post.title}
+        strong !{dateFormat(post.date)}
+        if post.tags
+            .post__tags !{tagsFormat(post.tags)}
+
+    .post__feed_body !{post.html_content}
