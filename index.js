@@ -48,6 +48,15 @@ Metalsmith(__dirname)
         if (err) throw err;
     });
 
+// keybase
+Metalsmith(__dirname)
+    .source('src/.well-known')
+    .destination(`${build_dir}/.well-known`)
+    .clean(false)
+    .build(function(err) {
+        if (err) throw err;
+    });
+
 // =============================================================================
 // posts
 // =============================================================================
