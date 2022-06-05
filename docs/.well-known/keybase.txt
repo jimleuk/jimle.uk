@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/jimle_uk
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://jimle.uk
+  * I am jimle_uk (https://keybase.io/jimle_uk) on keybase.
+  * I have a public key ASAKTA7_r8wIMeF9r9dTV9lGOo9GRFCoySyNQGj2azRU2Ao
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101711ffeed4d17e1b7d4f57a31973da03644a4ac0a93eee67c62d48c891076cede0a",
+      "host": "keybase.io",
+      "kid": "01200a4c0effafcc0831e17dafd75357d9463a8f464450a8c92c8d4068f66b3454d80a",
+      "uid": "538fc1c12962d1cdf6e7eb221a52fa19",
+      "username": "jimle_uk"
+    },
+    "merkle_root": {
+      "ctime": 1505750926,
+      "hash": "133a29909dd36543123c18c8982fe41d6140b851b082b6393f4b08ab3888c76932bd4e645dc75e62a051ab95e55ada33fb7b6fed5fd7da278c4de38790041b4e",
+      "hash_meta": "03299285e0ce61fd7e2f7bcdf3fc00d37d416fbf84a3aa5a484501e5b09c7722",
+      "seqno": 1396172
+    },
+    "service": {
+      "hostname": "jimle.uk",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.30"
+  },
+  "ctime": 1505750949,
+  "expire_in": 504576000,
+  "prev": "30b618df6f1d29a71f9c451630370ea5a68530e1090fa3bec4cc3045e2aa3ce6",
+  "seqno": 9,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgCkwO/6/MCDHhfa/XU1fZRjqPRkRQqMksjUBo9ms0VNgKp3BheWxvYWTFA0B7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTAxNzExZmZlZWQ0ZDE3ZTFiN2Q0ZjU3YTMxOTczZGEwMzY0NGE0YWMwYTkzZWVlNjdjNjJkNDhjODkxMDc2Y2VkZTBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwMGE0YzBlZmZhZmNjMDgzMWUxN2RhZmQ3NTM1N2Q5NDYzYThmNDY0NDUwYThjOTJjOGQ0MDY4ZjY2YjM0NTRkODBhIiwidWlkIjoiNTM4ZmMxYzEyOTYyZDFjZGY2ZTdlYjIyMWE1MmZhMTkiLCJ1c2VybmFtZSI6ImppbWxlX3VrIn0sIm1lcmtsZV9yb290Ijp7ImN0aW1lIjoxNTA1NzUwOTI2LCJoYXNoIjoiMTMzYTI5OTA5ZGQzNjU0MzEyM2MxOGM4OTgyZmU0MWQ2MTQwYjg1MWIwODJiNjM5M2Y0YjA4YWIzODg4Yzc2OTMyYmQ0ZTY0NWRjNzVlNjJhMDUxYWI5NWU1NWFkYTMzZmI3YjZmZWQ1ZmQ3ZGEyNzhjNGRlMzg3OTAwNDFiNGUiLCJoYXNoX21ldGEiOiIwMzI5OTI4NWUwY2U2MWZkN2UyZjdiY2RmM2ZjMDBkMzdkNDE2ZmJmODRhM2FhNWE0ODQ1MDFlNWIwOWM3NzIyIiwic2Vxbm8iOjEzOTYxNzJ9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoiamltbGUudWsiLCJwcm90b2NvbCI6Imh0dHBzOiJ9LCJ0eXBlIjoid2ViX3NlcnZpY2VfYmluZGluZyIsInZlcnNpb24iOjF9LCJjbGllbnQiOnsibmFtZSI6ImtleWJhc2UuaW8gZ28gY2xpZW50IiwidmVyc2lvbiI6IjEuMC4zMCJ9LCJjdGltZSI6MTUwNTc1MDk0OSwiZXhwaXJlX2luIjo1MDQ1NzYwMDAsInByZXYiOiIzMGI2MThkZjZmMWQyOWE3MWY5YzQ1MTYzMDM3MGVhNWE2ODUzMGUxMDkwZmEzYmVjNGNjMzA0NWUyYWEzY2U2Iiwic2Vxbm8iOjksInRhZyI6InNpZ25hdHVyZSJ9o3NpZ8RAeZi9nw3UC4lTiWbWREJMf+SXvLrPCtWRee/5BEfc1Ywye63lvmjLuylG0ovCo94XNvTdMTH4O7vRPlTpqHLkDahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIFsl4fyxz1Du08I19XjlGtcGxjBc9CBWp5aHMkVXrPFco3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/jimle_uk
+
+==================================================================

@@ -7,6 +7,8 @@ block header
 block footer
 
 block body
+    - var groupedPosts = groupPostsByDate(posts, 'MMMM YYYY')
+    - var sortedGroupedPostKeys = sortGroupedPostsKeys(groupedPosts)
     .nav
         .nav__row
             .container-fluid
@@ -15,31 +17,24 @@ block body
                         a.nav__item.nav__brand(href='/') JIMLE.UK
                         span.nav__item.nav__social
                             a(href="https://twitter.com/jimle_uk") @jimle_uk
-                        span.nav__item.nav__tagline About products and Javascript
+                        span.nav__item.nav__tagline Helping digital product teams do their best work
         .nav__row.nav__row_dark
-            .container-fluid
-                .row
-                    .col-xs-12
-                        .nav__item 🔥 Available for hire! <a href="mailto:jim@height.io">Get in touch</a>
     .content
         .container-fluid
             .row
-                .col-xs-12.col-md-8.col-lg-6
+                .col-xs-12.col-md-8.col-lg-7.col-lg-offset-1
                     .post__feed_list
-                        each post, i in posts.slice(0, 5)
-                            include ../templates/post_feed.pug
-                .col-xs-12.col-md-4.col-lg-6.col-lg-offset-0
+                        - var post = getLatestPost(posts)
+                        include ../templates/post_feed.pug
+                .col-xs-12.col-md-4.col-lg-3
                     .row
-                        .col-xs-12.col-lg-6
-                            .row
-                                .col-xs-12.col-sm-6.col-md-12
-                                    include ../templates/intro.pug
-                                    hr
-                                .col-xs-12.col-sm-6.col-md-12
-                                    h3 Archive
-                                    each group, key in groupPostsByDate(posts, 'MMMM YYYY')
-                                        strong #{key}
-                                        ul
-                                            each post in group
-                                                li
-                                                    a(href=post.permalink) #{post.title}
+                        .col-xs-12.col-sm-6.col-md-12
+                            include ../templates/intro.pug
+                            hr
+                        .col-xs-12.col-sm-6.col-md-12
+                            each key in sortedGroupedPostKeys
+                                strong #{key}
+                                ul
+                                    each post in groupedPosts[key]
+                                        li
+                                            a(href=post.permalink) #{post.title}

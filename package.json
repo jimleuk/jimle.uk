@@ -21,6 +21,7 @@
   "dependencies": {
     "async": "^2.1.4",
     "highlightjs": "^9.8.0",
+    "lodash": "^4.17.21",
     "lodash.pick": "^4.4.0",
     "markdown-it": "^8.2.2",
     "markdown-it-footnote": "^3.0.1",

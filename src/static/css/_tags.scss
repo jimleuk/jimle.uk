@@ -2,14 +2,19 @@
     padding-bottom: 60px;
 }
 .tagindex__item {
-    width: 23%;
-    display: inline-block;
-    margin: 1%;
-    vertical-align: top;
+    margin-bottom: 30px;
+
     h2 {
         margin-top: 0;
         margin-bottom: 15px;
         font-size: 14px;
         text-transform: capitalize;
+    }
+
+    @media (min-width: $screen_sm_min) {
+        display: inline-block;
+        width: 23%;
+        margin: 1%;
+        vertical-align: top;
     }
 }

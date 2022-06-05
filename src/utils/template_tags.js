@@ -2,7 +2,7 @@ const pth = require('path');
 const crypto = require('crypto');
 const settings = require('../../settings');
 const Moment = require('moment');
-const groupBy = require('lodash/groupBy');
+const { groupBy, orderBy } = require('lodash');
 
 const protocol = settings.https ? 'https://' : 'http://';
 const cache_string = +(new Date());
@@ -41,6 +41,21 @@ module.exports = {
     },
 
     groupPostsByDate: (posts, fmtString='YYYY-MM-DD') => {
-        return groupBy(posts, p => Moment(new Date(p.date)).format(fmtString));
+        const groupedPosts = groupBy(posts, p => Moment(new Date(p.date)).format(fmtString));
+        const keys = Object.keys(groupedPosts);
+        keys.forEach(key => {
+            groupedPosts[key] = orderBy(groupedPosts[key], [post => new Date(post.date)], ['desc']);
+        });
+        return groupedPosts;
+    },
+
+    sortGroupedPostsKeys: (groupedPosts) => {
+        const keys = Object.keys(groupedPosts);
+        return orderBy(keys, [key => new Date(key)], ['desc']);
+    },
+
+    getLatestPost: (posts) => {
+        const sortedPosts = orderBy(posts, [post => new Date(post.date)], ['desc']);
+        return sortedPosts[0];
     }
 };
