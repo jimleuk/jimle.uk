@@ -1,7 +1,7 @@
 const path = require('path');
 const check = require('./helpers/check');
 const each = require('async').each;
-const pug = require('pug');
+const pug = require('jstransformer')(require('jstransformer-pug'));
 
 module.exports = (opts) => {
     const { getPosts, getTags } = opts;
@@ -31,7 +31,7 @@ module.exports = (opts) => {
         */
         const convert = (file, done) => {
             const data = files[file];
-            const render = pug.render;
+            const render = pug.render.bind(pug);
 
             // Rename file if necessary
             delete files[file];
@@ -45,9 +45,7 @@ module.exports = (opts) => {
                     filename: path.join(metalsmith.source(), file)
                 }, metalsmith.metadata());
 
-                const contents = render(data.contents, render_vars);
-
-                data.contents = new Buffer(contents);
+                data.contents = render(data.contents, render_vars).body;
 
                 if (data.output_filename) {
                     file = path.join(fileInfo.dir, data.output_filename);

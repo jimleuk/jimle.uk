@@ -1,13 +1,11 @@
 #!/usr/local/bin/node
 
-const path          = require('path');
 const Metalsmith    = require('metalsmith');
-const collections   = require('metalsmith-collections');
-const layouts       = require('metalsmith-layouts');
-const permalinks    = require('metalsmith-permalinks');
-const ignore        = require('metalsmith-ignore');
-const sass          = require('metalsmith-sass');
-const debug         = require('metalsmith-debug');
+const collections   = require('@metalsmith/collections');
+const layouts       = require('@metalsmith/layouts');
+const inPlace       = require('@metalsmith/in-place');
+const remove        = require('@metalsmith/remove');
+const sass          = require('@metalsmith/sass');
 
 const metalsmith_pug        = require('./plugins/metalsmith-pug');
 const metalsmith_markdownit = require('./plugins/metalsmith-markdownit');
@@ -18,14 +16,18 @@ const template_tags = require('./src/utils/template_tags');
 const TaskSequence = require('./src/utils/task_sequence');
 const build_dir     = settings.build_dir;
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 // =============================================================================
 // assets
 // =============================================================================
 Metalsmith(__dirname)
     .source('src/static/css')
     .destination(`${build_dir}/static/css`)
-    .use(ignore(['vendor/*']))
-    .use(sass({ outputStyle: 'compressed' }))
+    .use(remove(['vendor/*']))
+    .use(sass({
+        style: isProduction ? 'compressed' : 'expanded',
+    }))
     .clean(false)
     .build(function(err) {
         if (err) throw err;
@@ -72,8 +74,7 @@ const phase_posts = (resolve) => {
         }))
         .use(metalsmith_markdownit())
         .use(layouts({
-            engine: 'pug',
-            directory: 'src/templates'
+            directory: 'src/templates',
         }))
         .use(cache_posts.plugin)
         .clean(false)

@@ -5,39 +5,45 @@
   "description": "Personal Blog @ jimle.uk",
   "main": "index.js",
   "scripts": {
-    "dev": "rm -rf build/* && DEBUG=metalsmith:* node index",
+    "dev": "rm -rf build/*; DEBUG=metalsmith:* node index",
     "serve": "http-server ./build",
-    "watch": "onchange 'src/**/*.*' -- node index",
+    "watch": "concurrently \"onchange 'src/**/*.*' -- node index\" \"http-server ./build\"",
     "build": "rm -rf docs/* && NODE_ENV=production node index"
   },
-  "repository": "https://github.com/jimle-uk/jimle.uk.git",
-  "bugs": "https://github.com/jimle-uk/jimle.uk/issues",
+  "repository": "https://github.com/jimleuk/jimle.uk.git",
+  "bugs": "https://github.com/jimleuk/jimle.uk/issues",
   "engines": {
-    "node": ">=4.0.0"
+    "node": "14.0.0"
   },
   "keywords": [],
   "author": "Jim Le <jim@height.io>",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.1.4",
+    "@metalsmith/collections": "^1.2.1",
+    "@metalsmith/in-place": "^4.5.0",
+    "@metalsmith/layouts": "^2.5.1",
+    "@metalsmith/markdown": "^1.6.0",
+    "@metalsmith/permalinks": "^2.4.0",
+    "@metalsmith/remove": "^1.1.2",
+    "@metalsmith/sass": "^1.0.0",
+    "async": "^2.6.4",
+    "concurrently": "^7.2.2",
     "highlightjs": "^9.8.0",
+    "jstransformer-pug": "^0.4.0",
     "lodash": "^4.17.21",
     "lodash.pick": "^4.4.0",
     "markdown-it": "^8.2.2",
+    "markdown-it-anchor": "^8.6.4",
     "markdown-it-footnote": "^3.0.1",
-    "metalsmith": "^2.3.0",
-    "metalsmith-collections": "^0.9.0",
+    "markdown-it-toc-done-right": "^4.2.0",
+    "metalsmith": "^2.5.0",
     "metalsmith-debug": "^1.1.0",
-    "metalsmith-ignore": "^0.1.2",
-    "metalsmith-layouts": "^1.7.0",
-    "metalsmith-markdown": "^0.2.1",
-    "metalsmith-permalinks": "^0.5.0",
     "metalsmith-sass": "^1.4.0",
-    "moment": "^2.17.1",
+    "moment": "^2.29.3",
     "pug": "^2.0.0-beta6"
   },
   "devDependencies": {
     "http-server": "^0.9.0",
-    "onchange": "^3.2.1"
+    "onchange": "^3.3.0"
   }
 }

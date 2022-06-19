@@ -4,16 +4,22 @@ const each              = require('async').each;
 const hljs              = require('highlightjs');
 const markdown          = require('markdown-it');
 const markdown_footnote = require('markdown-it-footnote');
+const markdown_anchor   = require("markdown-it-anchor");
+const markdown_toc      = require("markdown-it-toc-done-right");
 
 module.exports = (opts) => {
     const md = markdown({
         highlight: (str, lang) => {
             const hasLang = lang && hljs.getLanguage(lang);
             return hasLang ? hljs.highlight(lang, str).value : '';
-        }
+        },
     });
 
     md.use(markdown_footnote);
+    md.use(markdown_anchor, {
+        permalink: markdown_anchor.permalink.headerLink()
+    });
+    md.use(markdown_toc);
 
     return (files, metalsmith, done) => {
         const matches = {};
@@ -46,7 +52,7 @@ module.exports = (opts) => {
             try {
                 const contents = md.render(data.contents);
                 data.html_content = contents;
-                data.contents = new Buffer(contents);
+                data.contents = Buffer.from(contents);
                 files[file] = data;
                 done();
             } catch (err) {
