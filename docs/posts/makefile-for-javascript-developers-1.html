@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><title>Using make - an opinionated guide for javascript developers pt.1 | jimle.uk</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width"><link rel="alternate" hreflang="x-default" href="https://www.jimle.uk/posts/makefile-for-javascript-developers-1.html"><meta content="jimle.uk" name="og:site_name"><meta content="Using make - an opinionated guide for javascript developers pt.1" name="og:title"><meta content="https://www.jimle.uk/posts/makefile-for-javascript-developers-1.html" name="og:url"><meta content="A personal blog about developing for the web by Jim Le, a web developer based in London, UK" name="og:description"><meta content="website" name="og:type"><meta content="https://www.jimle.uk/static/img/site_icon.png?t=1654418359874" name="og:image"><link rel="stylesheet" href="https://www.jimle.uk/static/css/main.css?t=1654418359874"><link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://www.jimle.uk/rss.xml"><link rel="shortcut icon" href="https://www.jimle.uk/static/img/site_icon.png?t=1654418359874" type="image/png"><link rel="icon" href="https://www.jimle.uk/static/img/site_icon.png?t=1654418359874" type="image/x-icon"><link rel="prefetch" href="https://www.jimle.uk/posts/the-easiest-test-you-can-write.html"><link rel="prefetch" href="https://www.jimle.uk/posts/makefile-for-javascript-developers-2.html"></head><body><div class="overlay"></div><div class="page"><div class="header"><div class="container"><div class="row"><div class="col-xs-8"><div class="header__column"><div class="header__cell"><div class="header__title shutter"><div class="shutter__inner"><a href="https://www.jimle.uk/">jimle.uk</a><a href="https://www.jimle.uk/">Back to Homepage</a></div></div></div></div></div></div></div></div><div class="post"><div class="post__header"><div class="container"><div class="row"><div class="col-xs-12 col-md-7"><div class="post__title"><h1><a href="https://www.jimle.uk/posts/makefile-for-javascript-developers-1.html">Using make - an opinionated guide for javascript developers pt.1</a></h1><div class="post__meta"><span class="post__date">Sunday, 9th Apr 2017</span><div class="post__tags"><a href="https://www.jimle.uk/tags.html#javascript">#javascript</a></div></div></div></div></div></div></div><div class="post__body"><div class="container"><div class="row"><div class="col-xs-12 col-md-7"><div class="post__body__contents"><h3>This post is part 1 of a two part series</h3>
+<!DOCTYPE html><html lang="en"><head><title>Using make - an opinionated guide for javascript developers pt.1 | jimle.uk</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width"><link rel="alternate" hreflang="x-default" href="https://www.jimle.uk/posts/makefile-for-javascript-developers-1.html"><meta content="jimle.uk" name="og:site_name"><meta content="Using make - an opinionated guide for javascript developers pt.1" name="og:title"><meta content="https://www.jimle.uk/posts/makefile-for-javascript-developers-1.html" name="og:url"><meta content="A personal blog about developing for the web by Jim Le, a web developer based in London, UK" name="og:description"><meta content="website" name="og:type"><meta content="https://www.jimle.uk/static/img/site_icon.png?t=1655639578341" name="og:image"><link rel="stylesheet" href="https://www.jimle.uk/static/css/main.css?t=1655639578341"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://www.jimle.uk/rss.xml"><link rel="shortcut icon" href="https://www.jimle.uk/static/img/site_icon.png?t=1655639578341" type="image/png"><link rel="icon" href="https://www.jimle.uk/static/img/site_icon.png?t=1655639578341" type="image/x-icon"><link rel="prefetch" href="https://www.jimle.uk/posts/the-easiest-test-you-can-write.html"><link rel="prefetch" href="https://www.jimle.uk/posts/makefile-for-javascript-developers-2.html"></head><body><div class="overlay"></div><div class="page"><div class="header"><div class="container"><div class="row"><div class="col-xs-8"><div class="header__title"><a href="https://www.jimle.uk/">Claypot Mousetail Noodles 🍜</a></div></div></div></div><div class="nav__row"><div class="container"><div class="row"><div class="col-xs-8"><span class="nav__item nav__social"><a href="https://twitter.com/jimle_uk">@jimle_uk</a></span><span class="nav__item nav__tagline">Helping digital product teams do their best work</span></div></div></div></div></div><div class="content"><div class="post"><div class="post__header"><div class="container"><div class="row"><div class="col-xs-12 col-md-7"><div class="post__title"><h1><a href="https://www.jimle.uk/posts/makefile-for-javascript-developers-1.html">Using make - an opinionated guide for javascript developers pt.1</a></h1><div class="post__meta"><span class="post__date">Sunday, 9th Apr 2017</span><div class="post__tags"><a href="https://www.jimle.uk/tags.html#javascript">#javascript</a></div></div></div></div></div></div></div><div class="post__body m-b-3"><div class="container"><div class="row"><div class="col-xs-12 col-md-7"><div class="post__body__contents"><h3 id="this-post-is-part-1-of-a-two-part-series" tabindex="-1"><a class="header-anchor" href="#this-post-is-part-1-of-a-two-part-series">This post is part 1 of a two part series</a></h3>
 <ul>
 <li>
 <p><a href="https://jimle.uk/posts/makefile-for-javascript-developers-1.html"><strong>Part I. Using make</strong></a><br>
@@ -10,11 +10,11 @@ where I show you how to get started using make in your daily javascript workflow
 </li>
 </ul>
 <hr>
-<h3>Summary</h3>
+<h3 id="summary" tabindex="-1"><a class="header-anchor" href="#summary">Summary</a></h3>
 <p><code>make</code> is useful for stringing together multiple tasks to automate a build process. In a sufficiently sized project, we can assume there are various tasks such as moving files around, running tests, deploying to a remote location are all involved as well as the actual &quot;building&quot;. This is where <code>make</code> can make this process manageable.</p>
 <p>When running <code>make</code> in a directory, it will look for a <code>makefile</code> by default. This is a plain ascii file which
 list a bunch of user-defined tasks. Each task may have a list of dependencies; other tasks which will run beforehand<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> and optionally, one or more shell commands which are executed in succession when the task is called. It is possible to have tasks which simple combine other tasks and have commands of their own.</p>
-<h3>1. Getting started</h3>
+<h3 id="1.-getting-started" tabindex="-1"><a class="header-anchor" href="#1.-getting-started">1. Getting started</a></h3>
 <p>To start using <code>make</code>, create a file called <code>makefile</code> in the top-level directory of your project.<br>
 Next, add the following code to your <code>makefile</code>:</p>
 <pre><code class="language-make">hello:
@@ -24,7 +24,7 @@ Next, add the following code to your <code>makefile</code>:</p>
 <pre><code class="language-terminal">$ make
 Hello from make!
 </code></pre>
-<h3>2. Dependencies</h3>
+<h3 id="2.-dependencies" tabindex="-1"><a class="header-anchor" href="#2.-dependencies">2. Dependencies</a></h3>
 <p>In the following example, there are three named tasks <code>clean</code>, <code>build</code> and <code>deploy</code>. <code>clean</code> has no dependencies but
 <code>build</code> has one (which is <code>clean</code>) and <code>deploy</code> has one (which is <code>build</code>). Their respective commands are listed beneath each task and indented once.</p>
 <pre><code class="language-make">clean:
@@ -42,7 +42,7 @@ will run <code>clean</code>, then <code>build</code> before running our <code>de
 <pre><code class="language-make">deploy: test build 
     aws s3 cp ./build s3://mybucket --recursive
 </code></pre>
-<h3>3. Executing a task</h3>
+<h3 id="3.-executing-a-task" tabindex="-1"><a class="header-anchor" href="#3.-executing-a-task">3. Executing a task</a></h3>
 <p>When you run <code>make</code> with no arguments, it'll run the first task in the <code>makefile</code>. To run a specific task,
 just use the name of the task as the first argument.</p>
 <pre><code class="language-terminal"># Run the first task in the makefile
@@ -51,13 +51,13 @@ $ make
 # Run the deploy task
 $ make deploy
 </code></pre>
-<h3>4. Multiple commands per task ...</h3>
+<h3 id="4.-multiple-commands-per-task-..." tabindex="-1"><a class="header-anchor" href="#4.-multiple-commands-per-task-...">4. Multiple commands per task ...</a></h3>
 <p>It's possible to have multiple commands under a single task. The commands will execute one after the other. Just remember to keep the indentation the same as the first command.</p>
 <pre><code class="language-make">deploy: build
     aws s3 rm s3://mybucket --recursive
     aws s3 cp ./build s3://mybucket --recursive
 </code></pre>
-<h3>5. ... but watch out for context</h3>
+<h3 id="5.-...-but-watch-out-for-context" tabindex="-1"><a class="header-anchor" href="#5.-...-but-watch-out-for-context">5. ... but watch out for context</a></h3>
 <p>In <code>make</code>, each line is treated as a seperate shell session. This usually means you won't be able to
 pass outputs or return values from one command to the next<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>. However you can use a <code>\</code> at the end of each line to workaround this.</p>
 <pre><code class="language-make"># This example will fail.
@@ -79,7 +79,7 @@ deploy: build
 deploy: build
     AWSBUCKET=mybucket; aws s3 rm s3://$(AWSBUCKET) --recursive; aws s3 cp ./build s3://$(AWSBUCKET) --recursive
 </code></pre>
-<h3>6. Working with environment variables</h3>
+<h3 id="6.-working-with-environment-variables" tabindex="-1"><a class="header-anchor" href="#6.-working-with-environment-variables">6. Working with environment variables</a></h3>
 <p>You can set environment variables in your <code>makefile</code>. Note that these will override existing environment variables<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>.</p>
 <pre><code class="language-make">NODE_ENV = production
 
@@ -120,7 +120,7 @@ makefile:1: *** Recursive variable `PATH' references itself (eventually).  Stop.
 <p>You can fix this by using <code>:=</code> assignment instead.</p>
 <pre><code class="language-make">PATH := node_modules/.bin:$(PATH)
 </code></pre>
-<h3>7. Functions</h3>
+<h3 id="7.-functions" tabindex="-1"><a class="header-anchor" href="#7.-functions">7. Functions</a></h3>
 <p><code>make</code> also has support for functions. You can <strong>define</strong> them like so:</p>
 <p><strong><code>define &lt;fn name&gt;</code></strong><br>
 <code>...</code><br>
@@ -131,7 +131,7 @@ define say_something
 endef
 </code></pre>
 <p>To call a function use</p>
-<h4><code>$(call &lt;fn name&gt;,[arguments,...])</code></h4>
+<h4 id="%24(call-%3Cfn-name%3E%2C%5Barguments%2C...%5D)" tabindex="-1"><a class="header-anchor" href="#%24(call-%3Cfn-name%3E%2C%5Barguments%2C...%5D)"><code>$(call &lt;fn name&gt;,[arguments,...])</code></a></h4>
 <pre><code>deploy: build
     $(call say_something,&quot;Deploying!&quot;)
     AWSBUCKET=mybucket; \
@@ -144,10 +144,10 @@ endef
     echo &quot;Deploying with $(shell aws s3 --version)&quot;
     ...
 </code></pre>
-<h3>8. Conditionals</h3>
+<h3 id="8.-conditionals" tabindex="-1"><a class="header-anchor" href="#8.-conditionals">8. Conditionals</a></h3>
 <p>As you've noticed by now, <code>make</code> does have a few builtin commands ie. <code>$(shell ...)</code>.<br>
 I don't have a comprehensive list but here are two I've found useful for conditionals.</p>
-<h4><code>$(if [value],[success],[fail])</code></h4>
+<h4 id="%24(if-%5Bvalue%5D%2C%5Bsuccess%5D%2C%5Bfail%5D)" tabindex="-1"><a class="header-anchor" href="#%24(if-%5Bvalue%5D%2C%5Bsuccess%5D%2C%5Bfail%5D)"><code>$(if [value],[success],[fail])</code></a></h4>
 <ul>
 <li>Where <code>value</code>, <code>success</code>, <code>fail</code> can be a string or a function</li>
 <li>To trigger a <code>success</code>, <code>value</code> must satisfy <code>[[ -n value ]]</code></li>
@@ -162,7 +162,7 @@ SPECIAL_OFFER = $(if ,&quot;15%&quot;,&quot;0%&quot;)
 # real world scenario, you'll probably call a function
 SPECIAL_OFFER = $(if $(shell ...), &quot;15%&quot;, &quot;0%&quot;)
 </code></pre>
-<h4><code>$(filter [value1], [value2])</code></h4>
+<h4 id="%24(filter-%5Bvalue1%5D%2C-%5Bvalue2%5D)" tabindex="-1"><a class="header-anchor" href="#%24(filter-%5Bvalue1%5D%2C-%5Bvalue2%5D)"><code>$(filter [value1], [value2])</code></a></h4>
 <ul>
 <li>Where <code>value1</code> and <code>value2</code> can be a string or function</li>
 <li>Returns <code>value1</code> if <code>value1 == value2</code> else null</li>
@@ -171,13 +171,13 @@ SPECIAL_OFFER = $(if $(shell ...), &quot;15%&quot;, &quot;0%&quot;)
 <pre><code class="language-make">$(filter abc, abc)      # abc
 $(filter abc, def)      # null
 </code></pre>
-<h3>Conclusion</h3>
+<h3 id="conclusion" tabindex="-1"><a class="header-anchor" href="#conclusion">Conclusion</a></h3>
 <p>Congrats on making it this far.<br>
 Although what I've said here only <em>really</em> scratches the surface, it should be
 enough for anyone to start writing productive makefiles.</p>
 <p>In the next article, I do just that and show you some tips and tricks which help
 you get started on writing a makefile for your javascript projects.</p>
-<h3>This post is part 1 of a two part series</h3>
+<h3 id="this-post-is-part-1-of-a-two-part-series-1" tabindex="-1"><a class="header-anchor" href="#this-post-is-part-1-of-a-two-part-series-1">This post is part 1 of a two part series</a></h3>
 <ul>
 <li><a href="https://jimle.uk/posts/makefile-for-javascript-developers-1.html"><strong>Part I. Using make</strong></a><br>
 where I go over the basics of a makefile and the relevant parts you'll need to know.</li>
@@ -195,5 +195,6 @@ where I show you how to get started using make in your daily javascript workflow
 </li>
 </ol>
 </section>
-</div></div></div></div></div><div class="post__footer p-b-3"><div class="container"><div class="row"><div class="col-xs-12 col-sm-8 p-b-2"><hr></div></div><div class="row"><div class="col-xs-12 col-sm-6 col-md-4"><div class="intro"><img class="m-r-1" src="https://www.jimle.uk/static/img/site_icon.png?t=1654418359874" align="left" width="72"><p><strong>Jim Le</strong>
-<br> He/Him. Building digital products since 2010.</p><ul class="social"><li><a href="https://uk.linkedin.com/in/jimleuk"><img src="https://www.jimle.uk/static/img/linkedin.svg?t=1654418359874" width="24"></a></li><li><a href="http://twitter.com/jimle_uk"><img src="https://www.jimle.uk/static/img/twitter.svg?t=1654418359874" width="24"></a></li></ul></div></div><div class="col-xs-12 col-sm-6 col-md-4"><div class="post__footer__item"><h3>Next up</h3><div class="post__card"><h2><a href="https://www.jimle.uk/posts/makefile-for-javascript-developers-2.html">Using make - an opinionated guide for javascript developers pt.2</a></h2><strong>Saturday, 15th Apr 2017</strong><div class="post__tags"><a href="https://www.jimle.uk/tags.html#javascript">#javascript</a></div></div></div><div class="post__footer__item"><h3>Previously</h3><div class="post__card"><h2><a href="https://www.jimle.uk/posts/the-easiest-test-you-can-write.html">The easiest test you can write right now</a></h2><strong>Saturday, 14th Jan 2017</strong><div class="post__tags"><a href="https://www.jimle.uk/tags.html#programming">#programming</a><a href="https://www.jimle.uk/tags.html#javascript">#javascript</a><a href="https://www.jimle.uk/tags.html#testing">#testing</a></div></div></div></div></div></div></div></div></div></body></html><!--2022 copyright Jim Le <jim@height.io>. All rights reserved.-->
+</div></div></div></div></div><div class="post__footer p-b-3"><div class="container"><div class="row"><div class="col-xs-12 col-md-7"><hr class="m-b-2"><div class="intro"><div class="intro-left p-r-1"><img src="https://www.jimle.uk/static/img/site_icon.png?t=1655639578341" align="left"></div><div class="intro-right"><div class="m-b-1"><strong>Jim Le is a digital product developer</strong>
+<br> He/Him. I like building digital products and teams but can never find the time to talk about
+either. I tweet more frequently, this blog is for longer rants.</div><ul class="social"><li><a href="https://github.com/jimleuk"><img src="https://www.jimle.uk/static/img/github.svg?t=1655639578341" width="24"></a></li><li><a href="http://twitter.com/jimle_uk"><img src="https://www.jimle.uk/static/img/twitter.svg?t=1655639578341" width="24"></a></li><li><a href="https://uk.linkedin.com/in/jimleuk"><img src="https://www.jimle.uk/static/img/linkedin.svg?t=1655639578341" width="24"></a></li></ul></div></div><hr class="m-t-2"></div></div><div class="row"><div class="col-xs-12 col-md-7"><div class="row"><div class="col-xs-12 col-md-6"><div class="post__footer__item"><p>Next up</p><div class="post__card"><h3><a href="https://www.jimle.uk/posts/makefile-for-javascript-developers-2.html">Using make - an opinionated guide for javascript developers pt.2</a></h3><strong>Saturday, 15th Apr 2017</strong><div class="post__tags"><a href="https://www.jimle.uk/tags.html#javascript">#javascript</a></div></div></div></div><div class="col-xs-12 col-md-6"><div class="post__footer__item"><p>Previously</p><div class="post__card"><h3><a href="https://www.jimle.uk/posts/the-easiest-test-you-can-write.html">The easiest test you can write right now</a></h3><strong>Saturday, 14th Jan 2017</strong><div class="post__tags"><a href="https://www.jimle.uk/tags.html#programming">#programming</a><a href="https://www.jimle.uk/tags.html#javascript">#javascript</a><a href="https://www.jimle.uk/tags.html#testing">#testing</a></div></div></div></div></div></div></div></div></div></div></div></div></body></html><!--2022 copyright Jim Le <jim@height.io>. All rights reserved.-->
