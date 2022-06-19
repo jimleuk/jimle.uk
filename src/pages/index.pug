@@ -1,40 +1,12 @@
-extend ../templates/root.pug
+extends ../templates/root.pug
 
 block overrides
     - var title = 'Welcome'
 
-block header
-block footer
-
 block body
-    - var groupedPosts = groupPostsByDate(posts, 'MMMM YYYY')
-    - var sortedGroupedPostKeys = sortGroupedPostsKeys(groupedPosts)
-    .nav
-        .nav__row
-            .container-fluid
-                .row
-                    .col-xs-12
-                        a.nav__item.nav__brand(href='/') JIMLE.UK
-                        span.nav__item.nav__social
-                            a(href="https://twitter.com/jimle_uk") @jimle_uk
-                        span.nav__item.nav__tagline Helping digital product teams do their best work
-        .nav__row.nav__row_dark
     .content
-        .container-fluid
+        .container
             .row
-                .col-xs-12.col-md-8.col-lg-7.col-lg-offset-1
-                    .post__feed_list
-                        - var post = getLatestPost(posts)
-                        include ../templates/post_feed.pug
-                .col-xs-12.col-md-4.col-lg-3
-                    .row
-                        .col-xs-12.col-sm-6.col-md-12
-                            include ../templates/intro.pug
-                            hr
-                        .col-xs-12.col-sm-6.col-md-12
-                            each key in sortedGroupedPostKeys
-                                strong #{key}
-                                ul
-                                    each post in groupedPosts[key]
-                                        li
-                                            a(href=post.permalink) #{post.title}
+                .col-xs-12.col-lg-7
+                    - var post = getLatestPost(posts)
+                    include ../templates/post_feed.pug

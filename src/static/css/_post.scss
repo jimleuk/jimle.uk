@@ -5,13 +5,8 @@
     margin-top: 32px;
     margin-bottom: 32px;
     h1 {
-        font-size: 32px;
         line-height: 1.2;
         margin-bottom: 16px;
-    }
-
-    @media (min-width: $screen_sm_min) {
-        margin-top: 64px;
     }
 }
 
@@ -27,12 +22,10 @@
 
 .post__author {
     display: block;
-    font-size: 14px;
 }
 
 .post__meta {
     display: inline-block;
-    font-weight: 700;
     vertical-align: middle;
 }
 
@@ -41,17 +34,22 @@
         margin-right: 5px;
         color: $gray_dark;
         &:hover {
-            color: $red;
+            color: $magenta;
         }
     }
 }
 
 .post__body {
-    font-size: 14px;
-
-    h3{
-        margin-top: $padding_large_vertical * 3;
-        margin-bottom: $padding_large_vertical;
+    h2 {
+        margin-top: 64px;
+        // font-weight: 400;
+    }
+    h3 {
+        // font-weight: 400;
+    }
+    p {
+        font-size: $fontsize_medium;
+        line-height: 1.6;
     }
     img{
         max-width: 100%;
@@ -80,9 +78,11 @@
     .footnotes {
         margin-top: $padding_large_vertical * 2;
         margin-bottom: $padding_large_vertical * 2;
-        font-size: 12px;
         ol {
             padding-left: $padding_medium_horizontal;
+        }
+        p {
+            font-size: $fontsize_base;
         }
     }
 
@@ -96,16 +96,12 @@
             margin-left: 1rem;
             padding-right: 6px;
             padding-left: 6px;
-            font-size: 12px;
             color: $gray_dark;
             background-color: #fafafa;
         }
     }
 }
 
-.post__footer{
-    margin-top: 120px;
-}
 
 // =============================================================================
 // post card
@@ -115,50 +111,7 @@
     h2 {
         margin-top: 0;
         margin-bottom: 12px;
-        font-size: 18px;
     }
-}
-
-// =============================================================================
-// post feed
-// =============================================================================
-.post__feed_list {
-    .post__feed {
-        &:nth-child(n+2) {
-            display: none;
-        }
-    }
-
-    @media (min-width: $screen_sm_min) {
-        .post__feed {
-            &:nth-child(n+2) {
-                display: block;
-            }
-        }
-    }
-}
-
-.post__feed {
-    margin-bottom: 64px;
-    padding: 32px;
-
-    h2 {
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 24px;
-    }
-
-    @media (min-width: $screen_sm_min) {
-        padding: 0 64px;
-    }
-
-    @media (min-width: $screen_md_min) {
-        padding: 0 100px;
-    }
-}
-
-.post__feed_head {
-    margin-bottom: 32px;
 }
 
 // =============================================================================

@@ -57,5 +57,5 @@ module.exports = {
     getLatestPost: (posts) => {
         const sortedPosts = orderBy(posts, [post => new Date(post.date)], ['desc']);
         return sortedPosts[0];
-    }
+    },
 };

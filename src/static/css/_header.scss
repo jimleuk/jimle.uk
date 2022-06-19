@@ -1,14 +1,13 @@
 $header_height: 60px;
 
 .header {
-    padding-top: 5px;
+    padding-top: 32px;
+    padding-bottom: 16px;
+    background-color: $white;
     border-bottom: 1px solid #eee;
-    min-height: $header_height;
 }
 
 .header__title {
-    height: $header_height / 2;
-    font-family: 'Asap', 'Helvectica Neue', sans-serif;
     a {
         font-size: 24px;
         font-weight: 700;

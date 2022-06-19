@@ -3,89 +3,93 @@
 @import 'vendor/hljs';
 
 body {
-	color: #332f29;
-	font-size: $fontsize_base;
-	background-color: #03A9F4;
+  color: #332f29;
+  font-family: $font-family-sans-serif;
+  font-size: $fontsize_base;
+  background-color:$magenta;
 }
 
 a {
-	&:hover {
-		color: $red;
-	}
+  &:hover {
+    color: $magenta;
+  }
 }
 
-h1, h2, h3, h4{
-	a{
-		color: $gray_darkest;
-	}
-	&.border-bottom{
-		padding-bottom: $padding_base_vertical;
-		border-bottom: 1px solid $gray_light;
-	}
-}
-
-h1, h2 {
-	font-family: 'Asap', 'Helvectica Neue', sans-serif;
+h1, h2, h3, h4 {
+  a{
+    color: $gray_darkest;
+  }
+  &.border-bottom{
+    padding-bottom: $padding_base_vertical;
+    border-bottom: 1px solid $gray_light;
+  }
 }
 
 p {
-	margin-top: 5px;
+  margin-top: 5px;
 }
 
 ul{
-	padding-left: $padding_medium_horizontal;
-	&.list-style-none{
-		padding-left: 0;
-		list-style: none;
-	}
-	&.margin-none{
-		margin-top: 0;
-		margin-bottom: 0;
-	}
+  padding-left: $padding_medium_horizontal;
+  &.list-style-none{
+    padding-left: 0;
+    list-style: none;
+  }
+  &.margin-none{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 dd {
-	margin-left: 0;
+  margin-left: 0;
+}
+
+table {
+  td {
+    padding-right: 32px;
+    padding-bottom: 16px;
+  }
 }
 
 img {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 // =============================================================================
 // utils
 // =============================================================================
 .text-muted{
-	color: $gray;
+  color: $gray_dark;
 }
 .text-left{
-	text-align: left;
+  text-align: left;
 }
 .text-right{
-	text-align: right;
+  text-align: right;
 }
 .text-md {
-	font-size: 14px;
+  font-size: 14px;
 }
 .text-lg {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 
 $spacer: 15;
 
 @for $i from 1 through 3 {
-	.m-a-#{$i} { margin: #{$spacer * $i}px; }
-	.m-y-#{$i} { margin-top: #{$spacer * $i}px; margin-bottom: #{$spacer * $i}px; }
-	.m-x-#{$i} { margin-left: #{$spacer * $i}px; margin-right: #{$spacer * $i}px; }
-	.p-a-#{$i} { padding: #{$spacer * $i}px; }
-	.p-y-#{$i} { padding-top: #{$spacer * $i}px; padding-bottom: #{$spacer * $i}px; }
-	.p-x-#{$i} { padding-left: #{$spacer * $i}px; padding-right: #{$spacer * $i}px; }
+  .m-a-#{$i} { margin: #{$spacer * $i}px; }
+  .m-y-#{$i} { margin-top: #{$spacer * $i}px; margin-bottom: #{$spacer * $i}px; }
+  .m-x-#{$i} { margin-left: #{$spacer * $i}px; margin-right: #{$spacer * $i}px; }
+  .p-a-#{$i} { padding: #{$spacer * $i}px; }
+  .p-y-#{$i} { padding-top: #{$spacer * $i}px; padding-bottom: #{$spacer * $i}px; }
+  .p-x-#{$i} { padding-left: #{$spacer * $i}px; padding-right: #{$spacer * $i}px; }
 
-	@each $abbr, $prop in ('t': 'top', 'r': 'right', 'l': 'left', 'b': 'bottom') {
-		.m-#{$abbr}-#{$i} { margin-#{$prop}: #{$spacer * $i}px; }
-		.p-#{$abbr}-#{$i} { padding-#{$prop}: #{$spacer * $i}px; }
-	}
+  @each $abbr, $prop in ('t': 'top', 'r': 'right', 'l': 'left', 'b': 'bottom') {
+    .m-#{$abbr}-#{$i} { margin-#{$prop}: #{$spacer * $i}px; }
+    .p-#{$abbr}-#{$i} { padding-#{$prop}: #{$spacer * $i}px; }
+  }
 }
 
 // =============================================================================

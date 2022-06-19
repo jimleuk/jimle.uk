@@ -9,52 +9,56 @@ block meta
             link(rel="prefetch" href=url(`/posts/${post.path.replace('.md', '.html')}`))
 
 block body
-    .post
-        .post__header
-            .container
-                .row
-                    .col-xs-12.col-md-7
-                        .post__title
-                            h1
-                                a(href=permalink) #{title}
-                            .post__meta
-                                span.post__date !{dateFormat(date)}
-                                if tags
-                                    .post__tags !{tagsFormat(tags)}
-        .post__body
-            .container
-                .row
-                    .col-xs-12.col-md-7
-                        .post__body__contents !{contents}
-                        if meta
-                            .post__body__meta
-                                ul.list-style-none.margin-none
-                                    each pair in meta.split(',')
-                                        li
-                                            - var values = pair.split('=')
-                                            strong #{values[0]}
-                                            |  #{values[1]}
-        .post__footer.p-b-3
-            .container
-                if (previous || next)
+    .content
+        .post
+            .post__header
+                .container
                     .row
-                        .col-xs-12.col-sm-8.p-b-2
-                            hr
-                .row
-                    .col-xs-12.col-sm-6.col-md-4
-                        include intro.pug
-                    .col-xs-12.col-sm-6.col-md-4
-                        if next
-                            - var post = next
-                            - (post.permalink = `/posts/${post.path.replace('.md', '.html')}`)
-                                .post__footer__item
-                                    h3 Next up
-                                    include post_card.pug
-                        if previous
-                            - var post = previous
-                            - (post.permalink = `/posts/${post.path.replace('.md', '.html')}`)
-                                .post__footer__item
-                                    h3 Previously
-                                    include post_card.pug
+                        .col-xs-12.col-md-7
+                            .post__title
+                                h1
+                                    a(href=permalink) #{title}
+                                .post__meta
+                                    span.post__date !{dateFormat(date)}
+                                    if tags
+                                        .post__tags !{tagsFormat(tags)}
+            .post__body.m-b-3
+                .container
+                    .row
+                        .col-xs-12.col-md-7
+                            .post__body__contents !{contents}
+                            if meta
+                                .post__body__meta
+                                    ul.list-style-none.margin-none
+                                        each pair in meta.split(',')
+                                            li
+                                                - var values = pair.split('=')
+                                                strong #{values[0]}
+                                                |  #{values[1]}
+            .post__footer.p-b-3
+                .container
+                    .row
+                        .col-xs-12.col-md-7
+                            hr.m-b-2
+                            include intro.pug
+                            hr.m-t-2
+                    if (previous || next)
+                        .row
+                            .col-xs-12.col-md-7
+                                .row
+                                    if next
+                                        .col-xs-12.col-md-6
+                                            - var post = next
+                                            - (post.permalink = `/posts/${post.path.replace('.md', '.html')}`)
+                                                .post__footer__item
+                                                    p Next up
+                                                    include post_card.pug
+                                    if previous
+                                        .col-xs-12.col-md-6
+                                            - var post = previous
+                                            - (post.permalink = `/posts/${post.path.replace('.md', '.html')}`)
+                                                .post__footer__item
+                                                    p Previously
+                                                    include post_card.pug
 
 block footer
