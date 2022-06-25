@@ -10,6 +10,8 @@ const sass          = require('@metalsmith/sass');
 const metalsmith_pug        = require('./plugins/metalsmith-pug');
 const metalsmith_markdownit = require('./plugins/metalsmith-markdownit');
 const cache_posts           = require('./plugins/cache-posts');
+const metalsmith_videotag   = require('./plugins/metalsmith-video-tag');
+
 
 const settings      = require('./settings');
 const template_tags = require('./src/utils/template_tags');
@@ -73,6 +75,7 @@ const phase_posts = (resolve) => {
             reverse: true
         }))
         .use(metalsmith_markdownit())
+        .use(metalsmith_videotag())
         .use(layouts({
             directory: 'src/templates',
         }))

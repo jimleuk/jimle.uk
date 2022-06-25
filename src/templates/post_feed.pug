@@ -1,19 +1,9 @@
-.post
-    .post__header
-        .post__title
-            h1
-                a(href=url(post.permalink)) #{post.title}
-            .post__meta
-                span.post__date !{dateFormat(post.date)}
-                if post.tags
-                    .post__tags !{tagsFormat(post.tags)}
-    .post__body
-        .post__body__contents !{post.html_content}
-        if post.meta
-            .post__body__meta
-                ul.list-style-none.margin-none
-                    each pair in post.meta.split(',')
-                        li
-                            - var values = pair.split('=')
-                            strong #{values[0]}
-                            |  #{values[1]}
+- var groupedPosts = groupPostsByDate(posts, 'MMMM YYYY')
+- var sortedGroupedPostKeys = sortGroupedPostsKeys(groupedPosts)
+.post__feed
+    each key in sortedGroupedPostKeys
+        each post in groupedPosts[key]
+            .post__feed-item
+                div.post__feed-item-left #{dateFormat(post.date, 'MMM YYYY')}
+                div.post__feed-item-right
+                    a(href=post.permalink) #{post.title}

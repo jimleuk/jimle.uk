@@ -25,8 +25,8 @@ module.exports = {
         return `${protocol}${settings.site_static}${path}?t=${cache_string}`;
     },
 
-    dateFormat: (dateString) => {
-        return new Moment(dateString).format('dddd, Do MMM YYYY');
+    dateFormat: (dateString, format='dddd, Do MMM YYYY') => {
+        return new Moment(dateString).format(format);
     },
 
     tagsFormat: (tags) => {
